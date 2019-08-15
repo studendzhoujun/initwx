@@ -26,8 +26,10 @@
 </template>
 <style scoped>
   .loan-step{
-      margin-left:30px;
-      margin-right:30px;
+      /* margin-left:30px;
+      margin-right:30px; */
+      margin-top:60px;
+
       background-color:#fff;
       padding-bottom:55px;
   }
@@ -35,12 +37,14 @@
       font-family: PingFangSC-Medium;
       font-size: 40px;
       color: #000000;
-      margin-top:60px;
+      margin-left:30px;
   }
   .step-box{
       flex-direction: row;
       align-items: center;
       justify-content:space-around;
+      margin-left:30px;
+      margin-right:30px;
   }
   .step-item{
        align-items: center;

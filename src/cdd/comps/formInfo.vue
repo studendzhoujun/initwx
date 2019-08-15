@@ -15,22 +15,22 @@
       <div class="form-item dashed">
          <text class="item-name">车辆是否有贷款</text>
          <div class="item-loan">
-             <div class="loan-box">
-                <image class="loan-img" :src="loanImgActive"></image>
-                <text>有</text>
+             <div @click="change(true)" class="loan-box">
+                <image class="loan-img" :src="isLoan?loanImgActive:loanImg"></image>
+                <text class="loan-ml">有</text>
              </div>
-              <div class="loan-box margL">
-                <image class="loan-img" :src="loanImg"></image>
-                <text>没有</text>
+              <div @click="change(false)" class="loan-box margL">
+                <image class="loan-img" :src="isLoan?loanImg:loanImgActive"></image>
+                <text class="loan-ml">没有</text>
              </div>
          </div>
       </div>
-      <div class="proto">
-        <image class="pro-img" :src="proImg"></image>
-        <text class="pro-t">我已阅读并同意签署</text>
+      <div @click="agree" class="proto">
+        <image class="pro-img" :src="isOk?loanImgActive:proImg"></image>
+        <text class="pro-t loan-ml">我已阅读并同意签署</text>
         <text class="pro-t col">《用户信息授权协议》</text>
       </div>
-      <div class="btn">
+      <div @click="apply" :class="[isOk?'btn':'btn-disabled']">
         <text class="btn-text">立即申请</text>
       </div>
   </div>
@@ -111,6 +111,9 @@
        width:28px;
        height:28px;
    }
+   .loan-ml{
+     margin-left:10px;
+   }
    .proto{
      flex-direction: row;
      height:116px;
@@ -135,7 +138,9 @@
    .btn{
      width:638px;
      height:100px;
-     background-image: linear-gradient(to right, #FFA717, #FF720C);
+     /* background-image: linear-gradient(to right, #FFA717, #FF720C);
+      */
+      background-color:rgba(255,156,21,1);
      border-radius:5px;
      margin-left:32px;
      justify-content: center;
@@ -145,6 +150,16 @@
       font-family: PingFangSC-Medium;
       font-size: 36px;
       color: #FFFFFF;
+   }
+   .btn-disabled {
+     border-radius: 4px;
+     width:638px;
+     height:100px;
+     border-radius:5px;
+     margin-left:32px;
+     background-color:rgba(255,156,21,0.4);
+     justify-content: center;
+     align-items: center;
    }
 </style>
 <script>
@@ -157,6 +172,8 @@
         loanImgActive:require('../img/cdd-active.png'),
         loanImg:require('../img/cdd-default.png'),
         proImg:require('../img/pro-img.png'),
+        isOk:false,
+        isLoan:false,
       }
     },
     filters:{
@@ -173,7 +190,28 @@
         }
     },
     methods:{
-      
+      change(value){
+         this.isLoan=value
+      },
+      agree(){
+         this.isOk=this.isOk?false:true
+      },
+      apply(){
+        if(this.isOk){
+           var modal=weex.requireModule('modal')
+            // modal.toast({
+            //   message:'恭喜你申请成功',
+            //   duration:3
+            // })
+            var modal = weex.requireModule('modal')
+            modal.alert({
+              message: '恭喜你申请成功',
+              okTitle: '确认'
+            }, function () {
+              console.log('alert callback')
+            })
+        }
+      }
     }
   }
 </script>
