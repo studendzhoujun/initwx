@@ -1,6 +1,6 @@
 <template>
   <div class="pro">
-     <div @click="go(index)" v-for="(item,index) in datalist" :class="['pro1',isindex==index?'active':'']"><text>{{item.text}}</text></div>
+     <div @click="go(index)" v-for="(item,index) in datalist" :class="['pro1',isindex==index?'active':'']"><text class="col">{{item.text}}</text></div>
   </div>
 </template>
 <style scoped>
@@ -16,6 +16,9 @@
     justify-content:center;
     align-items:center;
 }
+.col{
+  color:aliceblue;
+}
 .active{
     background-color:#323444;
 }
@@ -27,10 +30,10 @@
          shouldFixed:true,
          isindex:0,
          datalist:[
-           {text:'R'},
-           {text:'D'},
-           {text:'T'},
-           {text:'G'}
+           {text:'A'},
+           {text:'B'},
+           {text:'C'},
+           {text:'D'}
          ]
       }
     },
